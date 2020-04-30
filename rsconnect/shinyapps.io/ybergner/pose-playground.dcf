@@ -1,0 +1,13 @@
+name: pose-playground
+title: pose-playground
+username:
+account: ybergner
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2220005
+bundleId: 3087430
+url: https://ybergner.shinyapps.io/pose-playground/
+when: 1588277840.6235
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|bones.csv|oldapp.R|README.md
