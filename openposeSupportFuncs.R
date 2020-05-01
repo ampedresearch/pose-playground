@@ -48,7 +48,7 @@ angle <- function(x,y){
 drawFrame <- function(framedat,  plotpeople=Inf, myColors=NULL,
                       crop=NULL, resolution=c(1920,1080),
                     portrait=F, invert=F, drawchull=FALSE) {
-  par(mar=c(5.1,4.1,1,1))
+  par(mar=c(2.1,2.1,0,0))
   if (!is.null(crop)) {
     plot(1, type="n", xlim=c(crop[1],crop[3]), ylim=c(crop[4],crop[2]), 
          asp = 1, xlab='',ylab='')

@@ -3,6 +3,7 @@ rm(list=ls())
 library(shiny)
 library(reshape)
 library(dplyr)
+library(stringr)
 library(RJSONIO)
 
 #source functions
@@ -20,7 +21,8 @@ posesInGroup <- getJSONdirs(posegroups[1])
 ui <- fluidPage(
   titlePanel("Exploring Pose Quantities"),
   fluidRow(
-    column(9, offset = 0, plotOutput("plotSkeleton"))
+    column(5, offset=0, plotOutput("image")),
+    column(7, offset=0, plotOutput("plotSkeleton"))
   ),
   fluidRow(
     column(3,
@@ -76,19 +78,18 @@ server <- function(input, output, session) {
     if (jsondir != "") {
       croprange <- c(input$cropxmin, input$cropymin, input$cropxmax, input$cropymax)
       # croprange <- c(input$cropx[1], input$cropy[1], input$cropx[2], input$cropy[2])
-      drawFrame(values$posematrices[[input$animation]], crop=croprange)
+      drawFrame(values$posematrices[[input$animation]], crop=croprange, drawchull = input$chull)
     }
-    }, height =400, width=400)
+    }, width=400)
   
   
   output$image <- renderImage({
-    imagename <- paste0("poses/", input$posegroup, input$pose, ".gif")
-    #  imagename <- paste0("data/segmentedOpenposeFrames/",input$dancerseg,
-    #        "/",input$dancerseg,sprintf("frame%03d.jpg", input$animation))
+    # imagename <- paste0("poses/", input$posegroup, "/", input$pose, ".gif")
+    imagename <- paste0("poses/", input$posegroup, "/", input$pose, "_imageframes/",
+                        sprintf("frame-%04d.jpg", input$animation))
     list(src = imagename,
-              contentType = 'image/gif',
-              width = 400,
-              height = 300,
+              contentType = 'image/jpg',
+              width = 500,
               alt = imagename)
   }, deleteFile = FALSE)
 }  
